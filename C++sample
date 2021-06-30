@@ -1,0 +1,332 @@
+#include<iostream>
+#include<numeric>
+template<class T>class calculation2{
+public:
+    T a;
+    T b;
+    calculation2()
+        :a()
+        ,b()
+    {
+        std::cout<<'\n'<<"⚫︎2つの数を入力して下さい。"<<'\n';
+    }
+    ~calculation2(){std::cout<<'\n'<<"⚫︎これで2つの数での計算を終了します。" <<'\n';}
+    friend std::istream& operator>>(std::istream& istm, calculation2& r)
+    {
+        return istm>>r.a>>r.b;
+    }
+    friend std::ostream& operator<<(std::ostream& ostm, const calculation2& r)
+    {
+        return ostm<<r.a<<"と"<<r.b;
+    }
+    T add2              () const { return a+b; }
+    T max_subtract_min2 () const { return std::max(a,b)-std::min(a,b); }
+    T multiple2         () const { return a*b; }
+    T arithmetical_mean2() const { return add2()/2; }
+    T geometrical_mean2 () const
+    {
+        return (a>0&&b>0)?sqrt(multiple2()):0;
+    }
+    T harmonic_mean2    () const {
+        if(a&&b){
+            if(const auto x=1/a+1/b)
+                return 2/x;
+        }
+        return 0;
+    }
+    T root_mean_square2() const { return sqrt((pow(a,2)+pow(b,2))/2); }
+    int gcd2           () const {
+        if(a>0&&b>0&&ceil(a)==floor(a)&&ceil(b)==floor(b))
+        {
+            return std::gcd(static_cast<int>(a),static_cast<int>(b));
+        }
+        return 0;
+    }
+    int lcm2           () const {
+        if(a>0&&b>0&&ceil(a)==floor(a)&&ceil(b)==floor(b))
+            return a*b/std::gcd(static_cast<int>(a),static_cast<int>(b));
+        return 0;
+    }
+};
+
+template<class T>class calculation3{
+public:
+    T a;
+    T b;
+    T c;
+    calculation3()
+        :a()
+        ,b()
+        ,c()
+    {
+        std::cout<<'\n'<<"⚫︎3つの数を入力して下さい。"<<'\n';
+    }
+    ~calculation3(){std::cout<<'\n'<<"⚫︎これで3つの数での計算を終了します。"<<'\n';}
+    friend std::istream& operator>>(std::istream& istm, calculation3& r)
+    {
+        return istm>>r.a>>r.b>>r.c;
+    }
+    friend std::ostream& operator<<(std::ostream& ostm, const calculation3& r)
+    {
+        return ostm<<r.a<<"と"<<r.b<<"と"<<r.c;
+    }
+    T add3              () const { return a+b+c; }
+    T max_subtract_min3 () const { return std::max({a,b,c})-std::min({a,b,c}); }
+    T multiple3         () const { return a*b*c; }
+    T arithmetical_mean3() const { return add3()/3; }
+    T geometrical_mean3 () const
+    {
+        return (a>0&&b>0&&c>0)?cbrt(multiple3()):0;
+    }
+    T harmonic_mean3    () const {
+        if(a&&b&&c){
+            if(const auto x=1/a+1/b+1/c)
+                return 3/x;
+        }
+        return 0;
+    }
+    T root_mean_square3() const { return sqrt((pow(a,2)+pow(b,2)+pow(c,2))/3); }
+    int gcd3           () const {
+        if(a>0&&b>0&&c>0&&ceil(a)==floor(a)&&ceil(b)==floor(b)&&ceil(c)==floor(c))
+        {
+            return std::gcd(std::gcd(static_cast<int>(a),static_cast<int>(b)),static_cast<int>(c));
+        }
+        return 0;
+    }
+    int lcm3           () const {
+        if(a>0&&b>0&&c>0&&ceil(a)==floor(a)&&ceil(b)==floor(b)&&ceil(c)==floor(c))
+            return a*b*c/std::gcd(std::gcd(static_cast<int>(a),static_cast<int>(b)),static_cast<int>(c));
+        return 0;
+    }
+    T max_cos          () const {
+        return std::min(
+            {(pow(a,2)+pow(b,2)-pow(c,2))/(2*a*b)
+            ,(pow(b,2)+pow(c,2)-pow(a,2))/(2*b*c)
+            ,(pow(a,2)+pow(c,2)-pow(b,2))/(2*a*c)
+            });
+    }
+    T max_angle        () const {
+        return acos(max_cos())*180/acos(-1);
+    }
+    T min_cos          () const {
+        return std::max(
+             {(pow(a,2)+pow(b,2)-pow(c,2))/(2*a*b)
+             ,(pow(b,2)+pow(c,2)-pow(a,2))/(2*b*c)
+             ,(pow(a,2)+pow(c,2)-pow(b,2))/(2*a*c)
+             });
+    }
+    T min_angle        () const {
+        return acos(min_cos())*180/acos(-1);
+    }
+    T triangle_area    () const {
+        return a*b*sin(acos((pow(a,2)+pow(b,2)-pow(c,2))/(2*a*b)))/2;
+    }
+};
+
+template<class T>class calculation4{
+public:
+    T a;
+    T b;
+    T c;
+    T d;
+    calculation4()
+        :a()
+        ,b()
+        ,c()
+        ,d()
+    {
+        std::cout<<'\n'<<"⚫︎4つの数を入力して下さい。"<<'\n';
+    }
+    ~calculation4(){std::cout<<'\n'<<"⚫︎これで4つの数での計算を終了します。"<<'\n';}
+    friend std::istream& operator>>(std::istream& istm, calculation4& r)
+    {
+        return istm>>r.a>>r.b>>r.c>>r.d;
+    }
+    friend std::ostream& operator<<(std::ostream& ostm, const calculation4& r)
+    {
+        return ostm<<r.a<<"と"<<r.b<<"と"<<r.c<<"と"<<r.d;
+    }
+    T add4              () const { return a+b+c+d; }
+    T max_subtract_min4 () const { return std::max({a,b,c,d})-std::min({a,b,c,d}); }
+    T multiple4         () const { return a*b*c*d; }
+    T arithmetical_mean4() const { return (add4())/4; }
+    T geometrical_mean4 () const
+    {
+        return (a>0&&b>0&&c>0&&d>0)?pow(multiple4(),pow(4,-1)):0;
+    }
+    T harmonic_mean4    () const {
+        if(a&&b&&c&&d){
+            if(const auto x=1/a+1/b+1/c+1/d)
+                return 4/x;
+        }
+        return 0;
+    }
+    T root_mean_square4 () const { return sqrt((pow(a,2)+pow(b,2)+pow(c,2)+pow(d,2))/4); }
+    int gcd4            () const {
+        if(a>0&&b>0&&c>0&&d>0&&ceil(a)==floor(a)&&ceil(b)==floor(b)&&ceil(c)==floor(c)&&ceil(d)==floor(d))
+        {
+            return std::gcd(std::gcd(std::gcd(static_cast<int>(a),static_cast<int>(b)),static_cast<int>(c)),static_cast<int>(d));
+        }
+        return 0;
+    }
+    int lcm4            () const {
+        if(a>0&&b>0&&c>0&&d>0&&ceil(a)==floor(a)&&ceil(b)==floor(b)&&ceil(c)==floor(c)&&ceil(d)==floor(d))
+            return a*b*c*d/std::gcd(std::gcd(std::gcd(static_cast<int>(a),static_cast<int>(b)),static_cast<int>(c)),static_cast<int>(d));
+        return 0;
+    }
+};
+
+struct display{
+    const char* left;
+    double value;
+    const char* right;
+};
+std::ostream& operator<<(std::ostream& ostm, const display& r)
+{
+    return ostm<<r.left<<r.value<<r.right;
+}
+void calc2()                                                                       //関数
+{
+    calculation2<double> x;
+    if(std::cin>>x)
+    {
+        std::cout<<'\n'
+            <<        "⚫︎"             <<x<<             "を入力しました。"<<'\n'
+            <<display{"合計は"           ,x.add2              (),"です。"}<<'\n'
+            <<display{"最大値と最小値の差は",x.max_subtract_min2 (),"です。"}<<'\n'
+            <<display{"積は"             ,x.multiple2         (),"です。"}<<'\n'
+            <<display{"相加平均は"        ,x.arithmetical_mean2(),"です。"}<<'\n';
+        const auto m=x.geometrical_mean2 ();
+        const auto n=x.harmonic_mean2    ();
+        if(m&&n){
+            std::cout
+            <<display{"相乗平均は"     ,m                    ,"です。"}<<'\n'
+            <<display{"調和平均は"     ,n                    ,"です。"}<<'\n'
+            <<display{"二乗平均平方根は",x.root_mean_square2(),"です。"}<<'\n'
+            ;
+            if(const auto p=x.gcd2())
+                std::cout
+                <<display{"最大公約数は",static_cast<double>(p       ),"です。"}<<'\n'
+                <<display{"最小公倍数は",static_cast<double>(x.lcm2()),"です。"}<<'\n'
+                ;
+            }
+        else if(n)
+            std::cout
+            <<        "相乗平均の値は" "不能"                   "です。"<<'\n'
+            <<display{"調和平均は"     ,n                    ,"です。"}<<'\n'
+            <<display{"二乗平均平方根は",x.root_mean_square2(),"です。"}<<'\n'
+            ;
+        else
+            std::cout
+            <<        "相乗平均の値は"  "不能"                  "です。"<<'\n'
+            <<        "調和平均の値も"  "不能"                  "です。"<<'\n'
+            <<display{"二乗平均平方根は",x.root_mean_square2(),"です。"}<<'\n'
+            ;
+    }
+    else
+        std::cerr<<"⚫︎入力が正しくなされませんでした。"<<'\n';
+}
+
+void calc3()
+{
+    calculation3<double> x;
+    if(std::cin>>x)
+    {
+        std::cout<<'\n'
+            <<        "⚫︎"             <<x<<             "を入力しました。"<<'\n'
+            <<display{"合計は"           ,x.add3              (),"です。"}<<'\n'
+            <<display{"最大値と最小値の差は",x.max_subtract_min3 (),"です。"}<<'\n'
+            <<display{"積は"             ,x.multiple3         (),"です。"}<<'\n'
+            <<display{"相加平均は"        ,x.arithmetical_mean3(),"です。"}<<'\n';
+        const auto m=x.geometrical_mean3 ();
+        const auto n=x.harmonic_mean3    ();
+        if(m&&n){
+            std::cout
+            <<display{"相乗平均は"     ,m                    ,"です。"}<<'\n'
+            <<display{"調和平均は"     ,n                    ,"です。"}<<'\n'
+            <<display{"二乗平均平方根は",x.root_mean_square3(),"です。"}<<'\n'
+            ;
+            if(const auto p=x.gcd3())
+                std::cout
+                <<display{"最大公約数は",static_cast<double>(p       ),"です。"}<<'\n'
+                <<display{"最小公倍数は",static_cast<double>(x.lcm3()),"です。"}<<'\n'
+                ;
+            std::cout
+            <<display{"3数をそれぞれの辺とする三角形の最小角は",x.max_cos      (),"°であり、"}<<'\n'
+            <<display{"そのcosの値は"                     ,x.max_angle    (),"です。"  }<<'\n'
+            <<display{"3数をそれぞれの辺とする三角形の最大角は",x.min_cos      (),"°であり、"}<<'\n'
+            <<display{"そのcosの値は"                     ,x.min_angle    (),"です。"  }<<'\n'
+            <<display{"またその三角形の面積は"              ,x.triangle_area(),"です。"  }<<'\n'
+            ;
+            }
+        else if(n)
+            std::cout
+            <<        "相乗平均の値は"  "不能"                  "です。"<<'\n'
+            <<display{"調和平均は"     ,n                    ,"です。"}<<'\n'
+            <<display{"二乗平均平方根は",x.root_mean_square3(),"です。"}<<'\n'
+            ;
+        else
+            std::cout
+            <<        "相乗平均の値は"  "不能"                  "です。"<<'\n'
+            <<        "調和平均の値も"  "不能"                  "です。"<<'\n'
+            <<display{"二乗平均平方根は",x.root_mean_square3(),"です。"}<<'\n'
+            ;
+    }
+    else
+        std::cerr<<"⚫︎入力が正しくなされませんでした。"<<'\n';
+}
+
+void calc4()
+{
+    calculation4<double> x;
+    if(std::cin>>x)
+    {
+        std::cout<<'\n'
+            <<        "⚫︎"             <<x<<             "を入力しました。"<<'\n'
+            <<display{"合計は"           ,x.add4              (),"です。"}<<'\n'
+            <<display{"最大値と最小値の差は",x.max_subtract_min4 (),"です。"}<<'\n'
+            <<display{"積は"             ,x.multiple4         (),"です。"}<<'\n'
+            <<display{"相加平均は"        ,x.arithmetical_mean4(),"です。"}<<'\n';
+        const auto m=x.geometrical_mean4();
+        const auto n=x.harmonic_mean4   ();
+        if(m&&n){
+            std::cout
+            <<display{"相乗平均は"     ,m                    ,"です。"}<<'\n'
+            <<display{"調和平均は"     ,n                    ,"です。"}<<'\n'
+            <<display{"二乗平均平方根は",x.root_mean_square4(),"です。"}<<'\n'
+            ;
+            if(const auto p=x.gcd4())
+                std::cout
+                <<display{"最大公約数は",static_cast<double>(p       ),"です。"}<<'\n'
+                <<display{"最小公倍数は",static_cast<double>(x.lcm4()),"です。"}<<'\n'
+                ;
+            }
+        else if(n)
+            std::cout
+            <<        "相乗平均の値は"  "不能"                  "です。"<<'\n'
+            <<display{"調和平均は"     ,n                    ,"です。"}<<'\n'
+            <<display{"二乗平均平方根は",x.root_mean_square4(),"です。"}<<'\n'
+            ;
+        else
+            std::cout
+            <<        "相乗平均の値は"  "不能"                  "です。"<<'\n'
+            <<        "調和平均の値も"  "不能"                  "です。"<<'\n'
+            <<display{"二乗平均平方根は",x.root_mean_square4(),"です。"}<<'\n'
+            ;
+    }
+    else
+        std::cerr<<"⚫︎入力が正しくなされませんでした。"<<'\n';
+}
+
+int main(){                                                                        //メイン
+    std::cout<<"⚫︎いくつの数での計算をしたいですか？"<<'\n';
+    int w;
+    std::cin>>w;
+    switch(w)
+    {
+        case  2: calc2();                                      break;
+        case  3: calc3();                                      break;
+        case  4: calc4();                                      break;
+        default: std::cerr<<"⚫︎お求めの計算はできません。"<<'\n';   break;
+    }
+}
